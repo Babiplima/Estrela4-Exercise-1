@@ -35,16 +35,28 @@ public class CarroController {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
+
     @PutMapping("/nomeDoCarro")
-    public void atualizarCarro(@RequestBody CarroDTO carroDTO){
-        for (CarroDTO objeto : concessionaria){
-            if(() -> objeto.setModelo())
-                return;
+    public CarroDTO atualizarCarro(@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO) {
+        CarroDTO carrobjeto = null;
+        for (CarroDTO objeto : concessionaria) {
+            if (objeto.getModelo().equals(nomeDoCarro)) {
+                carrobjeto = objeto;
+            }
+
+        }
+        if (carrobjeto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado");
         }
 
-    }
-}
+        carrobjeto.setAno(carroDTO.getAno());
+        carrobjeto.setCor(carroDTO.getCor());
+        carrobjeto.setMotor(carroDTO.getMotor());
+        return carrobjeto;
 
+    }
+
+}
 
 
 
