@@ -35,7 +35,7 @@ public class CarroController {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
-    @PutMapping
+    @PutMapping("/nomeDoCarro")
     public void atualizarCarro(@RequestBody CarroDTO carroDTO){
         for (CarroDTO objeto : concessionaria){
             if(() -> objeto.setModelo())
